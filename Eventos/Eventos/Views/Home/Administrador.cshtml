@@ -1,0 +1,24 @@
+﻿@model Eventos.Models.Login
+@{
+    ViewBag.Title = "Administrador";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("MenuAdmin", "Home", FormMethod.Post))
+{
+    <div>
+        <table>
+            <tr>
+                <td>
+                    Usuario:
+                    @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })
+                    <br />
+                    Contrasena:
+                    @Html.EditorFor(model => model.contrasena, new { htmlAttributes = new { @class = "form-control" } })
+                    <br />
+                    <input type="submit" value="Login" />
+                </td>
+            </tr>
+        </table>
+    </div>
+}

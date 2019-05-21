@@ -1,0 +1,49 @@
+﻿@model Eventos.Models.Recurso
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalle del Recurso</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lugar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lugar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoRecurso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoRecurso)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idRecurso }) |
+    @Html.ActionLink("Volver a Recursos", "Index")
+</p>
