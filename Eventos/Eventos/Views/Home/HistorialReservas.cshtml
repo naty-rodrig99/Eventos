@@ -1,0 +1,36 @@
+﻿@using System.Data;
+
+@{
+    ViewBag.Title = "HistorialReservas";
+}
+
+<h2 style="text-align:center;">Historial de Reservaciones</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table border="1">
+        <tr bgcolor="lightblue">
+            <th>numReservacion</th>
+            <th>fecha</th>
+            <th>hora</th>
+            <th>descripcion</th>
+        </tr>
+        @foreach (DataRow row in Model.Rows)
+        {
+            <tr>
+
+                <td>@row["numReservacion"]</td>
+                <td>@row["fecha"]</td>
+                <td>@row["hora"]</td>
+                <td>@row["descripcion"]</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

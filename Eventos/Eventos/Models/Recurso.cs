@@ -17,19 +17,17 @@ namespace Eventos.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Recurso()
         {
-            this.ProductoXRecursoes = new HashSet<ProductoXRecurso>();
             this.RecursoXPaquetes = new HashSet<RecursoXPaquete>();
             this.ReservacionXRecursoes = new HashSet<ReservacionXRecurso>();
         }
     
         public int idRecurso { get; set; }
         public string nombre { get; set; }
-        public Nullable<decimal> precio { get; set; }
-        public string lugar { get; set; }
         public string tipoRecurso { get; set; }
+        public string correo { get; set; }
+        public string telefono { get; set; }
+        public string provincia { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductoXRecurso> ProductoXRecursoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecursoXPaquete> RecursoXPaquetes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

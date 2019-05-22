@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Registrar Recurso</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Registrar Recurso", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -15,10 +15,13 @@
             @Html.DisplayNameFor(model => model.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.precio)
+            @Html.DisplayNameFor(model => model.correo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lugar)
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.provincia)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.tipoRecurso)
@@ -32,18 +35,21 @@
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.precio)
+            @Html.DisplayFor(modelItem => item.correo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.lugar)
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.provincia)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.tipoRecurso)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.idRecurso }) |
-            @Html.ActionLink("Detalle", "Details", new { id=item.idRecurso }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.idRecurso })
+            @Html.ActionLink("Edit", "Edit", new { id = item.idRecurso }) |
+            @Html.ActionLink("Details", "Details", new { id = item.idRecurso }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idRecurso })
         </td>
     </tr>
 }

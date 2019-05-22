@@ -10,15 +10,12 @@
 namespace Eventos.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ProductoXRecurso
+    public partial class SP_Historial_Reservaciones_Local_Result
     {
-        public int idProductoXRecurso { get; set; }
-        public Nullable<int> idProducto { get; set; }
-        public Nullable<int> idRecurso { get; set; }
-    
-        public virtual Producto Producto { get; set; }
-        public virtual Recurso Recurso { get; set; }
+        public string numReservacion { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<System.TimeSpan> hora { get; set; }
+        public string descripcion { get; set; }
     }
 }

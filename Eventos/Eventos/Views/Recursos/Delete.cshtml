@@ -4,10 +4,11 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar Recurso</h2>
+<h2>Delete</h2>
 
-<h3>Esta seguro que lo quiere eliminar?</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
+    <h4>Recurso</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,19 +20,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.precio)
+            @Html.DisplayNameFor(model => model.correo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.precio)
+            @Html.DisplayFor(model => model.correo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.lugar)
+            @Html.DisplayNameFor(model => model.telefono)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.lugar)
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.provincia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.provincia)
         </dd>
 
         <dt>
@@ -44,13 +53,12 @@
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Volver a Recursos", "Index")
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

@@ -6,6 +6,7 @@ using System.Web;
 using System.Net;
 using System.Web.Mvc;
 using Eventos.Models;
+using System.Data;
 
 namespace Eventos.Controllers
 {
@@ -102,6 +103,22 @@ namespace Eventos.Controllers
             }
 
             return View(administrador);
+        }
+
+
+        [HttpPost]
+        public ActionResult HistorialReservas()
+        {
+            String connection = "Data Source=DESKTOP-SV37236\\NATALIASQL;Initial Catalog=ESeventos;Persist Security Info=True;User ID=sa;Password=naty0409;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            SqlConnection conn = new SqlConnection(connection);
+            String query = "SP_Historial_Reservaciones_Local"; 
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
         }
 
 

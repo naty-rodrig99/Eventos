@@ -33,13 +33,13 @@ namespace Eventos.Models
         public virtual DbSet<Paquete> Paquetes { get; set; }
         public virtual DbSet<PaqueteXCliente> PaqueteXClientes { get; set; }
         public virtual DbSet<Producto> Productoes { get; set; }
-        public virtual DbSet<ProductoXRecurso> ProductoXRecursoes { get; set; }
         public virtual DbSet<Recurso> Recursoes { get; set; }
         public virtual DbSet<RecursoXPaquete> RecursoXPaquetes { get; set; }
         public virtual DbSet<Reservacion> Reservacions { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ReservacionXClienteXPaquete> ReservacionXClienteXPaquetes { get; set; }
         public virtual DbSet<ReservacionXRecurso> ReservacionXRecursoes { get; set; }
+        public virtual DbSet<PaqueteXProducto> PaqueteXProductoes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -210,6 +210,11 @@ namespace Eventos.Models
                 new ObjectParameter("password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Login_Cliente", usuarioParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<SP_Historial_Reservaciones_Local_Result> SP_Historial_Reservaciones_Local()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Historial_Reservaciones_Local_Result>("SP_Historial_Reservaciones_Local");
         }
     }
 }

@@ -3,12 +3,12 @@
     ViewBag.Title = "Administrador";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 >@ViewBag.Title</h2>
 @using (Html.BeginForm("MenuAdmin", "Home", FormMethod.Post))
 {
     <div>
         <table>
-            <tr>
+            <tr >
                 <td>
                     Usuario:
                     @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })

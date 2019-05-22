@@ -39,6 +39,7 @@
           </Key>
           <Property Name="idPaquete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="30" />
+          <Property Name="precio" Type="money" />
         </EntityType>
         <EntityType Name="PaqueteXCliente">
           <Key>
@@ -48,6 +49,14 @@
           <Property Name="idPaquete" Type="int" />
           <Property Name="idCliente" Type="int" />
         </EntityType>
+        <EntityType Name="PaqueteXProducto">
+          <Key>
+            <PropertyRef Name="idPaqueteXProducto" />
+          </Key>
+          <Property Name="idPaqueteXProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPaquete" Type="int" />
+          <Property Name="idProducto" Type="int" />
+        </EntityType>
         <EntityType Name="Producto">
           <Key>
             <PropertyRef Name="idProducto" />
@@ -56,22 +65,15 @@
           <Property Name="nombre" Type="varchar" MaxLength="30" />
           <Property Name="precio" Type="money" />
         </EntityType>
-        <EntityType Name="ProductoXRecurso">
-          <Key>
-            <PropertyRef Name="idProductoXRecurso" />
-          </Key>
-          <Property Name="idProductoXRecurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idProducto" Type="int" />
-          <Property Name="idRecurso" Type="int" />
-        </EntityType>
         <EntityType Name="Recurso">
           <Key>
             <PropertyRef Name="idRecurso" />
           </Key>
           <Property Name="idRecurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="30" />
-          <Property Name="precio" Type="money" />
-          <Property Name="lugar" Type="varchar" MaxLength="30" />
+          <Property Name="correo" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="30" />
+          <Property Name="provincia" Type="varchar" MaxLength="30" />
           <Property Name="tipoRecurso" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="RecursoXPaquete">
@@ -166,27 +168,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductoXRecurso_Producto">
+        <Association Name="FK_PaqueteXProducto_Paquete">
+          <End Role="Paquete" Type="Self.Paquete" Multiplicity="0..1" />
+          <End Role="PaqueteXProducto" Type="Self.PaqueteXProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paquete">
+              <PropertyRef Name="idPaquete" />
+            </Principal>
+            <Dependent Role="PaqueteXProducto">
+              <PropertyRef Name="idPaquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaqueteXProducto_Producto">
           <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
-          <End Role="ProductoXRecurso" Type="Self.ProductoXRecurso" Multiplicity="*" />
+          <End Role="PaqueteXProducto" Type="Self.PaqueteXProducto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="idProducto" />
             </Principal>
-            <Dependent Role="ProductoXRecurso">
+            <Dependent Role="PaqueteXProducto">
               <PropertyRef Name="idProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductoXRecurso_Recurso">
-          <End Role="Recurso" Type="Self.Recurso" Multiplicity="0..1" />
-          <End Role="ProductoXRecurso" Type="Self.ProductoXRecurso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Recurso">
-              <PropertyRef Name="idRecurso" />
-            </Principal>
-            <Dependent Role="ProductoXRecurso">
-              <PropertyRef Name="idRecurso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -299,6 +301,7 @@
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Historial_Reservaciones_Local" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Login_Administrador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="usuario" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
@@ -319,8 +322,8 @@
           <EntitySet Name="ClienteXReservacion" EntityType="Self.ClienteXReservacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paquete" EntityType="Self.Paquete" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaqueteXCliente" EntityType="Self.PaqueteXCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaqueteXProducto" EntityType="Self.PaqueteXProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductoXRecurso" EntityType="Self.ProductoXRecurso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recurso" EntityType="Self.Recurso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecursoXPaquete" EntityType="Self.RecursoXPaquete" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservacion" EntityType="Self.Reservacion" Schema="dbo" store:Type="Tables" />
@@ -343,13 +346,13 @@
             <End Role="Paquete" EntitySet="Paquete" />
             <End Role="PaqueteXCliente" EntitySet="PaqueteXCliente" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductoXRecurso_Producto" Association="Self.FK_ProductoXRecurso_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="ProductoXRecurso" EntitySet="ProductoXRecurso" />
+          <AssociationSet Name="FK_PaqueteXProducto_Paquete" Association="Self.FK_PaqueteXProducto_Paquete">
+            <End Role="Paquete" EntitySet="Paquete" />
+            <End Role="PaqueteXProducto" EntitySet="PaqueteXProducto" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductoXRecurso_Recurso" Association="Self.FK_ProductoXRecurso_Recurso">
-            <End Role="Recurso" EntitySet="Recurso" />
-            <End Role="ProductoXRecurso" EntitySet="ProductoXRecurso" />
+          <AssociationSet Name="FK_PaqueteXProducto_Producto" Association="Self.FK_PaqueteXProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="PaqueteXProducto" EntitySet="PaqueteXProducto" />
           </AssociationSet>
           <AssociationSet Name="FK_RecursoXPaquete_Paquete" Association="Self.FK_RecursoXPaquete_Paquete">
             <End Role="Paquete" EntitySet="Paquete" />
@@ -422,6 +425,8 @@
           <NavigationProperty Name="PaqueteXClientes" Relationship="Self.FK_PaqueteXCliente_Paquete" FromRole="Paquete" ToRole="PaqueteXCliente" />
           <NavigationProperty Name="RecursoXPaquetes" Relationship="Self.FK_RecursoXPaquete_Paquete" FromRole="Paquete" ToRole="RecursoXPaquete" />
           <NavigationProperty Name="ReservacionXClienteXPaquete" Relationship="ESeventosModel.FK_ReservacionXClienteXPaquete_Paquete" FromRole="Paquete" ToRole="ReservacionXClienteXPaquete" />
+          <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="PaqueteXProductoes" Relationship="ESeventosModel.FK_PaqueteXProducto_Paquete" FromRole="Paquete" ToRole="PaqueteXProducto" />
         </EntityType>
         <EntityType Name="PaqueteXCliente">
           <Key>
@@ -440,17 +445,7 @@
           <Property Name="idProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="ProductoXRecursoes" Relationship="Self.FK_ProductoXRecurso_Producto" FromRole="Producto" ToRole="ProductoXRecurso" />
-        </EntityType>
-        <EntityType Name="ProductoXRecurso">
-          <Key>
-            <PropertyRef Name="idProductoXRecurso" />
-          </Key>
-          <Property Name="idProductoXRecurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idProducto" Type="Int32" />
-          <Property Name="idRecurso" Type="Int32" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK_ProductoXRecurso_Producto" FromRole="ProductoXRecurso" ToRole="Producto" />
-          <NavigationProperty Name="Recurso" Relationship="Self.FK_ProductoXRecurso_Recurso" FromRole="ProductoXRecurso" ToRole="Recurso" />
+          <NavigationProperty Name="PaqueteXProductoes" Relationship="ESeventosModel.FK_PaqueteXProducto_Producto" FromRole="Producto" ToRole="PaqueteXProducto" />
         </EntityType>
         <EntityType Name="Recurso">
           <Key>
@@ -458,12 +453,12 @@
           </Key>
           <Property Name="idRecurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="lugar" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ProductoXRecursoes" Relationship="Self.FK_ProductoXRecurso_Recurso" FromRole="Recurso" ToRole="ProductoXRecurso" />
           <NavigationProperty Name="RecursoXPaquetes" Relationship="Self.FK_RecursoXPaquete_Recurso" FromRole="Recurso" ToRole="RecursoXPaquete" />
           <Property Name="tipoRecurso" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="ReservacionXRecursoes" Relationship="ESeventosModel.FK_ReservacionXRecurso_Recurso" FromRole="Recurso" ToRole="ReservacionXRecurso" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RecursoXPaquete">
           <Key>
@@ -557,30 +552,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductoXRecurso_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
-          <End Role="ProductoXRecurso" Type="Self.ProductoXRecurso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="idProducto" />
-            </Principal>
-            <Dependent Role="ProductoXRecurso">
-              <PropertyRef Name="idProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductoXRecurso_Recurso">
-          <End Role="Recurso" Type="Self.Recurso" Multiplicity="0..1" />
-          <End Role="ProductoXRecurso" Type="Self.ProductoXRecurso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Recurso">
-              <PropertyRef Name="idRecurso" />
-            </Principal>
-            <Dependent Role="ProductoXRecurso">
-              <PropertyRef Name="idRecurso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RecursoXPaquete_Recurso">
           <End Role="Recurso" Type="Self.Recurso" Multiplicity="0..1" />
           <End Role="RecursoXPaquete" Type="Self.RecursoXPaquete" Multiplicity="*" />
@@ -600,7 +571,6 @@
           <EntitySet Name="Paquetes" EntityType="Self.Paquete" />
           <EntitySet Name="PaqueteXClientes" EntityType="Self.PaqueteXCliente" />
           <EntitySet Name="Productoes" EntityType="Self.Producto" />
-          <EntitySet Name="ProductoXRecursoes" EntityType="Self.ProductoXRecurso" />
           <EntitySet Name="Recursoes" EntityType="Self.Recurso" />
           <EntitySet Name="RecursoXPaquetes" EntityType="Self.RecursoXPaquete" />
           <EntitySet Name="Reservacions" EntityType="Self.Reservacion" />
@@ -624,14 +594,6 @@
           <AssociationSet Name="FK_RecursoXPaquete_Paquete" Association="Self.FK_RecursoXPaquete_Paquete">
             <End Role="Paquete" EntitySet="Paquetes" />
             <End Role="RecursoXPaquete" EntitySet="RecursoXPaquetes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductoXRecurso_Producto" Association="Self.FK_ProductoXRecurso_Producto">
-            <End Role="Producto" EntitySet="Productoes" />
-            <End Role="ProductoXRecurso" EntitySet="ProductoXRecursoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductoXRecurso_Recurso" Association="Self.FK_ProductoXRecurso_Recurso">
-            <End Role="Recurso" EntitySet="Recursoes" />
-            <End Role="ProductoXRecurso" EntitySet="ProductoXRecursoes" />
           </AssociationSet>
           <AssociationSet Name="FK_RecursoXPaquete_Recurso" Association="Self.FK_RecursoXPaquete_Recurso">
             <End Role="Recurso" EntitySet="Recursoes" />
@@ -705,6 +667,16 @@
             <Parameter Name="usuario" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_Historial_Reservaciones_Local" ReturnType="Collection(ESeventosModel.SP_Historial_Reservaciones_Local_Result)" />
+          <EntitySet Name="PaqueteXProductoes" EntityType="ESeventosModel.PaqueteXProducto" />
+          <AssociationSet Name="FK_PaqueteXProducto_Paquete" Association="ESeventosModel.FK_PaqueteXProducto_Paquete">
+            <End Role="Paquete" EntitySet="Paquetes" />
+            <End Role="PaqueteXProducto" EntitySet="PaqueteXProductoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaqueteXProducto_Producto" Association="ESeventosModel.FK_PaqueteXProducto_Producto">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="PaqueteXProducto" EntitySet="PaqueteXProductoes" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -785,6 +757,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_Historial_Reservaciones_Local_Result">
+          <Property Type="String" Name="numReservacion" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="Time" Name="hora" Nullable="true" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="40" />
+        </ComplexType>
+        <EntityType Name="PaqueteXProducto">
+          <Key>
+            <PropertyRef Name="idPaqueteXProducto" />
+          </Key>
+          <Property Name="idPaqueteXProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPaquete" Type="Int32" />
+          <Property Name="idProducto" Type="Int32" />
+          <NavigationProperty Name="Paquete" Relationship="ESeventosModel.FK_PaqueteXProducto_Paquete" FromRole="PaqueteXProducto" ToRole="Paquete" />
+          <NavigationProperty Name="Producto" Relationship="ESeventosModel.FK_PaqueteXProducto_Producto" FromRole="PaqueteXProducto" ToRole="Producto" />
+        </EntityType>
+        <Association Name="FK_PaqueteXProducto_Paquete">
+          <End Type="ESeventosModel.Paquete" Role="Paquete" Multiplicity="0..1" />
+          <End Type="ESeventosModel.PaqueteXProducto" Role="PaqueteXProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paquete">
+              <PropertyRef Name="idPaquete" />
+            </Principal>
+            <Dependent Role="PaqueteXProducto">
+              <PropertyRef Name="idPaquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaqueteXProducto_Producto">
+          <End Type="ESeventosModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="ESeventosModel.PaqueteXProducto" Role="PaqueteXProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="PaqueteXProducto">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -825,6 +837,7 @@
           <EntitySetMapping Name="Paquetes">
             <EntityTypeMapping TypeName="ESeventosModel.Paquete">
               <MappingFragment StoreEntitySet="Paquete">
+                <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
@@ -848,24 +861,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductoXRecursoes">
-            <EntityTypeMapping TypeName="ESeventosModel.ProductoXRecurso">
-              <MappingFragment StoreEntitySet="ProductoXRecurso">
-                <ScalarProperty Name="idProductoXRecurso" ColumnName="idProductoXRecurso" />
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="idRecurso" ColumnName="idRecurso" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Recursoes">
             <EntityTypeMapping TypeName="ESeventosModel.Recurso">
               <MappingFragment StoreEntitySet="Recurso">
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="tipoRecurso" ColumnName="tipoRecurso" />
                 <ScalarProperty Name="idRecurso" ColumnName="idRecurso" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="lugar" ColumnName="lugar" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecursoXPaquetes">
@@ -945,6 +950,25 @@
           <FunctionImportMapping FunctionImportName="SP_CrearCliente" FunctionName="ESeventosModel.Store.SP_CrearCliente" />
           <FunctionImportMapping FunctionImportName="SP_Login_Administrador" FunctionName="ESeventosModel.Store.SP_Login_Administrador" />
           <FunctionImportMapping FunctionImportName="SP_Login_Cliente" FunctionName="ESeventosModel.Store.SP_Login_Cliente" />
+          <FunctionImportMapping FunctionImportName="SP_Historial_Reservaciones_Local" FunctionName="ESeventosModel.Store.SP_Historial_Reservaciones_Local">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ESeventosModel.SP_Historial_Reservaciones_Local_Result">
+                <ScalarProperty Name="numReservacion" ColumnName="numReservacion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="PaqueteXProductoes">
+            <EntityTypeMapping TypeName="ESeventosModel.PaqueteXProducto">
+              <MappingFragment StoreEntitySet="PaqueteXProducto">
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
+                <ScalarProperty Name="idPaqueteXProducto" ColumnName="idPaqueteXProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

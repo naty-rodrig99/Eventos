@@ -17,7 +17,7 @@ namespace Eventos.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
-            this.ProductoXRecursoes = new HashSet<ProductoXRecurso>();
+            this.PaqueteXProductoes = new HashSet<PaqueteXProducto>();
         }
     
         public int idProducto { get; set; }
@@ -25,6 +25,6 @@ namespace Eventos.Models
         public Nullable<decimal> precio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductoXRecurso> ProductoXRecursoes { get; set; }
+        public virtual ICollection<PaqueteXProducto> PaqueteXProductoes { get; set; }
     }
 }

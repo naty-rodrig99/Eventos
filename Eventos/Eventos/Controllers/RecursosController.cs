@@ -6,9 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Eventos.Models;
 
-namespace Eventos.Controllers
+namespace Eventos.Models
 {
     public class RecursosController : Controller
     {
@@ -46,7 +45,7 @@ namespace Eventos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idRecurso,nombre,precio,lugar,tipoRecurso")] Recurso recurso)
+        public ActionResult Create([Bind(Include = "idRecurso,nombre,correo,telefono,provincia,tipoRecurso")] Recurso recurso)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +77,7 @@ namespace Eventos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idRecurso,nombre,precio,lugar,tipoRecurso")] Recurso recurso)
+        public ActionResult Edit([Bind(Include = "idRecurso,nombre,correo,telefono,provincia,tipoRecurso")] Recurso recurso)
         {
             if (ModelState.IsValid)
             {
