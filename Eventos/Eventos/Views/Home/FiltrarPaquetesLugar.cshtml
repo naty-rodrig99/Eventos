@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Eventos.Models.Paquete>
+
+@{ 
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("FiltrarPaquetesLugar", "Home", FormMethod.Post))
+{
+    <div>
+        Lugar: @Html.TextBox("search")
+        <input id="Submit1" type="submit" value="Search" />
+    </div>
+}
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lugar)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lugar)
+            </td>
+        </tr>
+}
+
+    </table>
+

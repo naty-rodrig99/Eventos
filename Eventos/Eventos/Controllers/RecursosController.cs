@@ -12,6 +12,7 @@ namespace Eventos.Models
     public class RecursosController : Controller
     {
         private ESeventosEntities db = new ESeventosEntities();
+        public static int idPaquete;
 
         // GET: Recursos
         public ActionResult Index()
@@ -122,5 +123,14 @@ namespace Eventos.Models
             }
             base.Dispose(disposing);
         }
+
+        // GET: Paquetes
+        public ActionResult VerPaquetes([Bind(Include ="idPaquete")]Paquete paquete)
+        {
+            //idPaquete = ;
+            return View(db.Paquetes.ToList());
+        }
+
+        
     }
 }

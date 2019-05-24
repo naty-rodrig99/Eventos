@@ -1,0 +1,49 @@
+﻿@using System.Data;
+
+@{
+    ViewBag.Title = "VerRecursos";
+}
+
+<h2 style="text-align:center;">Recursos</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VerRecursos</title>
+</head>
+<p>
+    @Html.ActionLink("Crear Recurso", "Create","Recursos")
+</p>
+<body>
+    <table class="table">
+        <tr bgcolor="lightGray">
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <th>Provincia</th>
+            <th>Tipo Recurso</th>
+        </tr>
+        @foreach (DataRow row in Model.Rows)
+        {
+        <tr>
+            <td>@row["nombre"]</td>
+            <td>@row["correo"]</td>
+            <td>@row["telefono"]</td>
+            <td>@row["provincia"]</td>
+            <td>@row["tipoRecurso"]</td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", @row["idRecurso"] ) |
+                @Html.ActionLink("Details", "Details", @row["idRecurso"]) |
+                @Html.ActionLink("Delete", "Delete", @row["idRecurso"]) |
+                @Html.ActionLink("Paquetes", "VerPaquetes", @row["idRecurso"]) |
+            </td>
+        </tr>
+
+        }
+
+    </table>
+</body>
+</html>

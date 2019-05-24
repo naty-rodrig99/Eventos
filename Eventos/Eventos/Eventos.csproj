@@ -151,7 +151,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RecursosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,15 +185,17 @@
     <Compile Include="Models\PaqueteXCliente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Producto.cs">
+    <Compile Include="Models\PaqueteXProducto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductoXRecurso.cs">
+    <Compile Include="Models\Producto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Recurso.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\RecursosController.cs" />
+    <Compile Include="Models\Recurso1.cs" />
     <Compile Include="Models\RecursoXPaquete.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -211,6 +212,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Historial_Reservaciones_Local_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -276,11 +280,20 @@
     <Content Include="Views\Home\MenuCliente.cshtml" />
     <Content Include="Views\Home\RegistrarCliente.cshtml" />
     <Content Include="Views\Home\RegistrarAdministrador.cshtml" />
+    <Content Include="Views\Home\HistorialReservasLocal.cshtml" />
     <Content Include="Views\Recursos\Create.cshtml" />
     <Content Include="Views\Recursos\Delete.cshtml" />
     <Content Include="Views\Recursos\Details.cshtml" />
     <Content Include="Views\Recursos\Edit.cshtml" />
     <Content Include="Views\Recursos\Index.cshtml" />
+    <Content Include="Views\Home\HistorialReservasCatering.cshtml" />
+    <Content Include="Views\Home\HistorialReservasMusica.cshtml" />
+    <Content Include="Views\Home\HistorialReservasDecoracion.cshtml" />
+    <Content Include="Views\Recursos\VerPaquetes.cshtml" />
+    <Content Include="Views\Home\HistorialReservasCliente.cshtml" />
+    <Content Include="Views\Home\VerRecursos.cshtml" />
+    <Content Include="Views\Home\FiltrarPaquetesLugar.cshtml" />
+    <Content Include="Views\Home\FiltrarPaquetesPrecio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

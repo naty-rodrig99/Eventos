@@ -39,7 +39,8 @@
           </Key>
           <Property Name="idPaquete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="30" />
-          <Property Name="precio" Type="money" />
+          <Property Name="precio" Type="varchar" MaxLength="50" />
+          <Property Name="lugar" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PaqueteXCliente">
           <Key>
@@ -91,7 +92,7 @@
           <Property Name="idReservacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="numReservacion" Type="varchar" MaxLength="10" />
           <Property Name="fecha" Type="date" />
-          <Property Name="hora" Type="time" Precision="7" />
+          <Property Name="hora" Type="time" Precision="4" />
           <Property Name="descripcion" Type="varchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="ReservacionXClienteXPaquete">
@@ -421,12 +422,13 @@
             <PropertyRef Name="idPaquete" />
           </Key>
           <Property Name="idPaquete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="PaqueteXClientes" Relationship="Self.FK_PaqueteXCliente_Paquete" FromRole="Paquete" ToRole="PaqueteXCliente" />
           <NavigationProperty Name="RecursoXPaquetes" Relationship="Self.FK_RecursoXPaquete_Paquete" FromRole="Paquete" ToRole="RecursoXPaquete" />
           <NavigationProperty Name="ReservacionXClienteXPaquete" Relationship="ESeventosModel.FK_ReservacionXClienteXPaquete_Paquete" FromRole="Paquete" ToRole="ReservacionXClienteXPaquete" />
-          <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="precio" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="PaqueteXProductoes" Relationship="ESeventosModel.FK_PaqueteXProducto_Paquete" FromRole="Paquete" ToRole="PaqueteXProducto" />
+          <Property Name="lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PaqueteXCliente">
           <Key>
@@ -477,7 +479,7 @@
           <Property Name="idReservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="numReservacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="hora" Type="Time" Precision="7" />
+          <Property Name="hora" Type="Time" Precision="4" />
           <Property Name="descripcion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ClienteXReservacions" Relationship="Self.FK_ClienteXReservacion_Reservacion" FromRole="Reservacion" ToRole="ClienteXReservacion" />
           <NavigationProperty Name="ReservacionXRecursoes" Relationship="ESeventosModel.FK_ReservacionXRecurso_Reservacion" FromRole="Reservacion" ToRole="ReservacionXRecurso" />
@@ -838,6 +840,7 @@
             <EntityTypeMapping TypeName="ESeventosModel.Paquete">
               <MappingFragment StoreEntitySet="Paquete">
                 <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="lugar" ColumnName="lugar" />
                 <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>

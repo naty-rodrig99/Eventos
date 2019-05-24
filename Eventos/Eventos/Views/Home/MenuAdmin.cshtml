@@ -8,21 +8,33 @@
     <div class="col-md-4">
         <div class="row">
             <br />
-            @Html.ActionLink("RegistrarAdministrador", "RegistrarAdministrador", null, new { @class = "btn btn-primary btn-large" })
+            @Html.ActionLink("Registrar Administrador", "RegistrarAdministrador", null, new { @class = "btn btn-primary btn-large" })
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="row">
             <br />
-            @Html.ActionLink("Recursos", "Index", "Recursos", null, new { @class = "btn btn-primary btn-large" })
+            @Html.ActionLink("Recursos", "Index","Recursos", null, new { @class = "btn btn-primary btn-large" })
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="row">
             <br />
-            @Html.ActionLink("Historial de Reservaciones", "HistorialReservas","Home", null, new { @class = "btn btn-primary btn-large" })
+            @Html.ActionLink("Reservaciones Locales", "HistorialReservasLocal", "Home", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+        <div class="row">
+            <br />
+            @Html.ActionLink("Reservaciones Catering", "HistorialReservasCatering", "Home", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+        <div class="row">
+            <br />
+            @Html.ActionLink("Reservaciones Musica", "HistorialReservasMusica", "Home", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+        <div class="row">
+            <br />
+            @Html.ActionLink("Reservaciones Decoracion", "HistorialReservasDecoracion", "Home", null, new { @class = "btn btn-primary btn-large" })
         </div>
     </div>
 
