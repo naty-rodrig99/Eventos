@@ -229,6 +229,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\comida.jpg" />
+    <Content Include="Image\header.PNG" />
+    <Content Include="Image\musica.jpg" />
+    <Content Include="Image\salon.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
