@@ -10,14 +10,14 @@
 namespace Eventos.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class SP_Historial_Reservaciones_Musica_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string numReservacion { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<System.TimeSpan> hora { get; set; }
+        public string descripcion { get; set; }
+        public string tipoRecurso { get; set; }
+        public string usuario { get; set; }
     }
 }

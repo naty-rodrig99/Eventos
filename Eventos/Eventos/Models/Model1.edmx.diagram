@@ -4,32 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="99b48cee8ba84ccbbaa7406dfc3e1e3c" Name="Diagram1">
-        <EntityTypeShape EntityType="ESeventosModel.Administrador" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.Cliente" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.ClienteXReservacion" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.Paquete" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.PaqueteXCliente" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.Producto" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.Recurso" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.RecursoXPaquete" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.Reservacion" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel.sysdiagram" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
-        <AssociationConnector Association="ESeventosModel.FK_ClienteXReservacion_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="ESeventosModel.FK_PaqueteXCliente_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="ESeventosModel.FK_ClienteXReservacion_Reservacion" ManuallyRouted="false" />
-        <AssociationConnector Association="ESeventosModel.FK_PaqueteXCliente_Paquete" ManuallyRouted="false" />
-        <AssociationConnector Association="ESeventosModel.FK_RecursoXPaquete_Paquete" ManuallyRouted="false" />
-        <AssociationConnector Association="ESeventosModel.FK_RecursoXPaquete_Recurso" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ESeventosModel.ReservacionXClienteXPaquete" Width="1.5" PointX="5.25" PointY="1.875" />
-        <EntityTypeShape EntityType="ESeventosModel.ReservacionXRecurso" Width="1.5" PointX="3" PointY="13.125" />
-        <AssociationConnector Association="ESeventosModel.FK_ReservacionXClienteXPaquete_ClienteXReservacion" />
-        <AssociationConnector Association="ESeventosModel.FK_ReservacionXClienteXPaquete_Paquete" />
-        <AssociationConnector Association="ESeventosModel.FK_ReservacionXRecurso_Recurso" />
-        <AssociationConnector Association="ESeventosModel.FK_ReservacionXRecurso_Reservacion" />
-        <EntityTypeShape EntityType="ESeventosModel.PaqueteXProducto" Width="1.5" PointX="6" PointY="10.875" />
-        <AssociationConnector Association="ESeventosModel.FK_PaqueteXProducto_Paquete" />
-        <AssociationConnector Association="ESeventosModel.FK_PaqueteXProducto_Producto" />
+      <Diagram DiagramId="0517a74f8a424929b6d5154544a2ea3a" Name="Diagram1" ZoomLevel="133">
+        <EntityTypeShape EntityType="ESeventosModel1.Administrador" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.Cliente" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.ClienteXReservacion" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.Paquete" Width="1.5" PointX="0.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.PaqueteXCliente" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.PaqueteXProducto" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.Producto" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.Recurso" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.RecursoXPaquete" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.Reservacion" Width="1.5" PointX="5.375" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.ReservacionXClienteXPaquete" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.ReservacionXRecurso" Width="1.5" PointX="3.75" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="ESeventosModel1.FK_ClienteXReservacion_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_PaqueteXCliente_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_ClienteXReservacion_Reservacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_ReservacionXClienteXPaquete_ClienteXReservacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_PaqueteXCliente_Paquete" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_PaqueteXProducto_Paquete" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_RecursoXPaquete_Paquete" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_ReservacionXClienteXPaquete_Paquete" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_PaqueteXProducto_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_RecursoXPaquete_Recurso" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_ReservacionXRecurso_Recurso" ManuallyRouted="false" />
+        <AssociationConnector Association="ESeventosModel1.FK_ReservacionXRecurso_Reservacion" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

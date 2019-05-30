@@ -11,12 +11,13 @@ namespace Eventos.Models
 {
     using System;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class SP_Historial_Reservaciones_Cliente_Result
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public string numReservacion { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<System.TimeSpan> hora { get; set; }
+        public string descripcion { get; set; }
+        public string tipoRecurso { get; set; }
+        public string usuario { get; set; }
     }
 }

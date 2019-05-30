@@ -23,10 +23,10 @@ namespace Eventos.Models
     
         public int idRecurso { get; set; }
         public string nombre { get; set; }
-        public string tipoRecurso { get; set; }
         public string correo { get; set; }
         public string telefono { get; set; }
         public string provincia { get; set; }
+        public string tipoRecurso { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecursoXPaquete> RecursoXPaquetes { get; set; }

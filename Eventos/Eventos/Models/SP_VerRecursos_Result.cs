@@ -11,9 +11,13 @@ namespace Eventos.Models
 {
     using System;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class SP_VerRecursos_Result
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int idRecurso { get; set; }
+        public string nombre { get; set; }
+        public string correo { get; set; }
+        public string telefono { get; set; }
+        public string provincia { get; set; }
+        public string tipoRecurso { get; set; }
     }
 }

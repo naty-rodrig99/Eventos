@@ -18,21 +18,22 @@ namespace Eventos.Models
         public Paquete()
         {
             this.PaqueteXClientes = new HashSet<PaqueteXCliente>();
-            this.RecursoXPaquetes = new HashSet<RecursoXPaquete>();
             this.PaqueteXProductoes = new HashSet<PaqueteXProducto>();
+            this.RecursoXPaquetes = new HashSet<RecursoXPaquete>();
         }
     
         public int idPaquete { get; set; }
         public string nombre { get; set; }
         public string precio { get; set; }
         public string lugar { get; set; }
+        public Nullable<bool> disponible { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaqueteXCliente> PaqueteXClientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PaqueteXProducto> PaqueteXProductoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecursoXPaquete> RecursoXPaquetes { get; set; }
         public virtual ReservacionXClienteXPaquete ReservacionXClienteXPaquete { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PaqueteXProducto> PaqueteXProductoes { get; set; }
     }
 }

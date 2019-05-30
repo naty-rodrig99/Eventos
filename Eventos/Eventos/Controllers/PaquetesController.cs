@@ -6,111 +6,116 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Eventos.Models;
 
-namespace Eventos.Models
+namespace Eventos.Controllers
 {
-    public class RecursosController : Controller
+    public class PaquetesController : Controller
     {
         private ESeventosEntities1 db = new ESeventosEntities1();
-        public static int idPaquete;
 
-        // GET: Recursos
+        // GET: Paquetes
         public ActionResult Index()
         {
-            return View(db.Recursoes.ToList());
+            var paquetes = db.Paquetes.Include(p => p.ReservacionXClienteXPaquete);
+            return View(paquetes.ToList());
         }
 
-        // GET: Recursos/Details/5
+        // GET: Paquetes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recurso recurso = db.Recursoes.Find(id);
-            if (recurso == null)
+            Paquete paquete = db.Paquetes.Find(id);
+            if (paquete == null)
             {
                 return HttpNotFound();
             }
-            return View(recurso);
+            return View(paquete);
         }
 
-        // GET: Recursos/Create
+        // GET: Paquetes/Create
         public ActionResult Create()
         {
+            ViewBag.idPaquete = new SelectList(db.ReservacionXClienteXPaquetes, "idReservacionXClienteXPaquete", "idReservacionXClienteXPaquete");
             return View();
         }
 
-        // POST: Recursos/Create
+        // POST: Paquetes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idRecurso,nombre,correo,telefono,provincia,tipoRecurso")] Recurso recurso)
+        public ActionResult Create([Bind(Include = "idPaquete,nombre,precio,lugar,disponible")] Paquete paquete)
         {
             if (ModelState.IsValid)
             {
-                db.Recursoes.Add(recurso);
+                db.Paquetes.Add(paquete);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(recurso);
+            ViewBag.idPaquete = new SelectList(db.ReservacionXClienteXPaquetes, "idReservacionXClienteXPaquete", "idReservacionXClienteXPaquete", paquete.idPaquete);
+            return View(paquete);
         }
 
-        // GET: Recursos/Edit/5
+        // GET: Paquetes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recurso recurso = db.Recursoes.Find(id);
-            if (recurso == null)
+            Paquete paquete = db.Paquetes.Find(id);
+            if (paquete == null)
             {
                 return HttpNotFound();
             }
-            return View(recurso);
+            ViewBag.idPaquete = new SelectList(db.ReservacionXClienteXPaquetes, "idReservacionXClienteXPaquete", "idReservacionXClienteXPaquete", paquete.idPaquete);
+            return View(paquete);
         }
 
-        // POST: Recursos/Edit/5
+        // POST: Paquetes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idRecurso,nombre,correo,telefono,provincia,tipoRecurso")] Recurso recurso)
+        public ActionResult Edit([Bind(Include = "idPaquete,nombre,precio,lugar,disponible")] Paquete paquete)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recurso).State = EntityState.Modified;
+                db.Entry(paquete).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(recurso);
+            ViewBag.idPaquete = new SelectList(db.ReservacionXClienteXPaquetes, "idReservacionXClienteXPaquete", "idReservacionXClienteXPaquete", paquete.idPaquete);
+            return View(paquete);
         }
 
-        // GET: Recursos/Delete/5
+        // GET: Paquetes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recurso recurso = db.Recursoes.Find(id);
-            if (recurso == null)
+            Paquete paquete = db.Paquetes.Find(id);
+            if (paquete == null)
             {
                 return HttpNotFound();
             }
-            return View(recurso);
+            return View(paquete);
         }
 
-        // POST: Recursos/Delete/5
+        // POST: Paquetes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Recurso recurso = db.Recursoes.Find(id);
-            db.Recursoes.Remove(recurso);
+            Paquete paquete = db.Paquetes.Find(id);
+            db.Paquetes.Remove(paquete);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -123,14 +128,5 @@ namespace Eventos.Models
             }
             base.Dispose(disposing);
         }
-
-        // GET: Paquetes
-        public ActionResult VerPaquetes([Bind(Include ="idPaquete")]Paquete paquete)
-        {
-            //idPaquete = ;
-            return View(db.Paquetes.ToList());
-        }
-
-        
     }
 }

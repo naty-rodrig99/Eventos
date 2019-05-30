@@ -11,7 +11,7 @@ namespace Eventos.Models
 {
     using System;
     
-    public partial class SP_Historial_Reservaciones_Local_Result
+    public partial class SP_Historial_Reservaciones_Catering_Result
     {
         public string numReservacion { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }

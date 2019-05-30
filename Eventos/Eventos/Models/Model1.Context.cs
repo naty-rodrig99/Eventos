@@ -15,10 +15,10 @@ namespace Eventos.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ESeventosEntities : DbContext
+    public partial class ESeventosEntities1 : DbContext
     {
-        public ESeventosEntities()
-            : base("name=ESeventosEntities")
+        public ESeventosEntities1()
+            : base("name=ESeventosEntities1")
         {
         }
     
@@ -32,117 +32,13 @@ namespace Eventos.Models
         public virtual DbSet<ClienteXReservacion> ClienteXReservacions { get; set; }
         public virtual DbSet<Paquete> Paquetes { get; set; }
         public virtual DbSet<PaqueteXCliente> PaqueteXClientes { get; set; }
+        public virtual DbSet<PaqueteXProducto> PaqueteXProductoes { get; set; }
         public virtual DbSet<Producto> Productoes { get; set; }
         public virtual DbSet<Recurso> Recursoes { get; set; }
         public virtual DbSet<RecursoXPaquete> RecursoXPaquetes { get; set; }
         public virtual DbSet<Reservacion> Reservacions { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ReservacionXClienteXPaquete> ReservacionXClienteXPaquetes { get; set; }
         public virtual DbSet<ReservacionXRecurso> ReservacionXRecursoes { get; set; }
-        public virtual DbSet<PaqueteXProducto> PaqueteXProductoes { get; set; }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
     
         public virtual int SP_CrearAdministrador(string usuario, string correo, string cedula, string contrasena)
         {
@@ -186,6 +82,86 @@ namespace Eventos.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CrearCliente", usuarioParameter, correoParameter, cedulaParameter, contrasenaParameter);
         }
     
+        public virtual int SP_CrearRecurs(string nombre, string correo, string telefono, string provincia, string tipoRecurso)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var provinciaParameter = provincia != null ?
+                new ObjectParameter("provincia", provincia) :
+                new ObjectParameter("provincia", typeof(string));
+    
+            var tipoRecursoParameter = tipoRecurso != null ?
+                new ObjectParameter("tipoRecurso", tipoRecurso) :
+                new ObjectParameter("tipoRecurso", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CrearRecurs", nombreParameter, correoParameter, telefonoParameter, provinciaParameter, tipoRecursoParameter);
+        }
+    
+        public virtual int SP_CrearRecursoXPaquete(Nullable<int> idRecurso, Nullable<int> idPaquete)
+        {
+            var idRecursoParameter = idRecurso.HasValue ?
+                new ObjectParameter("idRecurso", idRecurso) :
+                new ObjectParameter("idRecurso", typeof(int));
+    
+            var idPaqueteParameter = idPaquete.HasValue ?
+                new ObjectParameter("idPaquete", idPaquete) :
+                new ObjectParameter("idPaquete", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CrearRecursoXPaquete", idRecursoParameter, idPaqueteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_EncuentraCliente(string usuario, string password)
+        {
+            var usuarioParameter = usuario != null ?
+                new ObjectParameter("usuario", usuario) :
+                new ObjectParameter("usuario", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_EncuentraCliente", usuarioParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<SP_Historial_Reservaciones_Catering_Result> SP_Historial_Reservaciones_Catering()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Historial_Reservaciones_Catering_Result>("SP_Historial_Reservaciones_Catering");
+        }
+    
+        public virtual ObjectResult<SP_Historial_Reservaciones_Cliente_Result> SP_Historial_Reservaciones_Cliente(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Historial_Reservaciones_Cliente_Result>("SP_Historial_Reservaciones_Cliente", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<SP_Historial_Reservaciones_Decoracion_Result> SP_Historial_Reservaciones_Decoracion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Historial_Reservaciones_Decoracion_Result>("SP_Historial_Reservaciones_Decoracion");
+        }
+    
+        public virtual ObjectResult<SP_Historial_Reservaciones_Local_Result> SP_Historial_Reservaciones_Local()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Historial_Reservaciones_Local_Result>("SP_Historial_Reservaciones_Local");
+        }
+    
+        public virtual ObjectResult<SP_Historial_Reservaciones_Musica_Result> SP_Historial_Reservaciones_Musica()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Historial_Reservaciones_Musica_Result>("SP_Historial_Reservaciones_Musica");
+        }
+    
         public virtual ObjectResult<Nullable<int>> SP_Login_Administrador(string usuario, string password)
         {
             var usuarioParameter = usuario != null ?
@@ -212,9 +188,68 @@ namespace Eventos.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Login_Cliente", usuarioParameter, passwordParameter);
         }
     
-        public virtual ObjectResult<SP_Historial_Reservaciones_Local_Result> SP_Historial_Reservaciones_Local()
+        public virtual int SP_RealizarReservacion(string numReservacion, Nullable<System.DateTime> fecha, Nullable<System.TimeSpan> hora, string descripcion, Nullable<int> idPaquete)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Historial_Reservaciones_Local_Result>("SP_Historial_Reservaciones_Local");
+            var numReservacionParameter = numReservacion != null ?
+                new ObjectParameter("numReservacion", numReservacion) :
+                new ObjectParameter("numReservacion", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var horaParameter = hora.HasValue ?
+                new ObjectParameter("hora", hora) :
+                new ObjectParameter("hora", typeof(System.TimeSpan));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var idPaqueteParameter = idPaquete.HasValue ?
+                new ObjectParameter("idPaquete", idPaquete) :
+                new ObjectParameter("idPaquete", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RealizarReservacion", numReservacionParameter, fechaParameter, horaParameter, descripcionParameter, idPaqueteParameter);
+        }
+    
+        public virtual int SP_RegistrarPaquete(Nullable<int> idRecurso, string nombre, Nullable<decimal> precio)
+        {
+            var idRecursoParameter = idRecurso.HasValue ?
+                new ObjectParameter("idRecurso", idRecurso) :
+                new ObjectParameter("idRecurso", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RegistrarPaquete", idRecursoParameter, nombreParameter, precioParameter);
+        }
+    
+        public virtual int SP_Reservacion_Final(Nullable<int> idReservacion, Nullable<int> idRecurso, Nullable<int> idCliente)
+        {
+            var idReservacionParameter = idReservacion.HasValue ?
+                new ObjectParameter("idReservacion", idReservacion) :
+                new ObjectParameter("idReservacion", typeof(int));
+    
+            var idRecursoParameter = idRecurso.HasValue ?
+                new ObjectParameter("idRecurso", idRecurso) :
+                new ObjectParameter("idRecurso", typeof(int));
+    
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Reservacion_Final", idReservacionParameter, idRecursoParameter, idClienteParameter);
+        }
+    
+        public virtual ObjectResult<SP_VerRecursos_Result> SP_VerRecursos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VerRecursos_Result>("SP_VerRecursos");
         }
     }
 }
