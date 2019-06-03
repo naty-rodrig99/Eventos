@@ -54,6 +54,7 @@ namespace Eventos.Controllers
             {
                 db.Reservacions.Add(reservacion);
                 db.SaveChanges();
+                correoReservaCliente(HomeController.mail, (int)reservacion.idPaquete, reservacion.idReservacion, reservacion.descripcion);
                 return RedirectToAction("Index");
             }
 
@@ -133,18 +134,20 @@ namespace Eventos.Controllers
             String query = "exec SP_RealizarReservacion " + reservacion.numReservacion + ", '" + reservacion.fecha + reservacion.hora + ", '" + reservacion.descripcion + ", '" + reservacion.idPaquete + ", '" + "'";
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();
-            //correoReservaCliente(HomeController.mail, (int) reservacion.idPaquete, reservacion.idReservacion, reservacion.descripcion);
+            
             return View("~/Views/Home/Administrador.cshtml");
         }
 
         public void correoReservaCliente(String mail, int idPaquete, int idReserva, String descripcion)
         {
 
-            MailMessage correo = new MailMessage("noreply@es-eventos.com", mail);
+            MailMessage correo = new MailMessage("noreplyeseventos@gmail.com", mail);
             SmtpClient client = new SmtpClient();
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
+            client.Credentials= new System.Net.NetworkCredential("noreplyeseventos@gmail.com","eventos123");
+            client.Port = 25;
+            client.EnableSsl=true;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.Host = "smtp.gmail.com";
             correo.Subject = "Notificacion de reserva.";
             String body = "Estimado cliente, le informamos que se ha reservado un paquete a su nombre con los siguientes datos:\n\nNumero de reservacion:" + idReserva + "\n\nID del Paquete:" + idPaquete + "\n\nDescripcion:" + descripcion + "\n\n";
