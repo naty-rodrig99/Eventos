@@ -4,8 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Paquetes disponibles</h2>
+    <h2 style="color:MediumSeaGreen">Paquetes</h2>
 
+    <p>
+        @Html.ActionLink("Crear Paquete", "Create")
+    </p>
 
 <table class="table">
     <tr>
@@ -43,7 +46,7 @@
         @Html.DisplayFor(modelItem => item.lugar)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.disponible.Value)
+        @Html.DisplayFor(modelItem => item.disponible)
     </td>
 
 </tr>

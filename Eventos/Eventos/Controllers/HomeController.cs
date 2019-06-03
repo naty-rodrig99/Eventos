@@ -10,11 +10,13 @@ using System.Data;
 using System.Diagnostics;
 
 namespace Eventos.Controllers
-{
+{   
     public class HomeController : Controller
+
     {
         private ESeventosEntities1 db = new ESeventosEntities1();
         public static int idCliente;
+        public static String mail;
 
         public ActionResult Index()
         {
@@ -34,7 +36,7 @@ namespace Eventos.Controllers
         [HttpPost]
         public ActionResult MenuAdmin(Login login)
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "exec SP_Login_Administrador " + login.usuario + ", '" + login.contrasena + "'";
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -52,7 +54,7 @@ namespace Eventos.Controllers
         [HttpPost]
         public ActionResult MenuCliente(Login login)
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "exec SP_Login_Cliente " + login.usuario + ", '" + login.contrasena + "'";
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -68,6 +70,12 @@ namespace Eventos.Controllers
                 conn1.Open();
                 string getId = cmd1.ExecuteScalar().ToString();
                 idCliente = Convert.ToInt16(getId);
+                //SqlConnection conn2 = new SqlConnection(connection);
+                String query2 = "exec SP_CorreoCliente " + login.usuario + ", '" + login.contrasena + "'";
+                SqlCommand cmd2 = new SqlCommand(query2, conn);
+                //conn2.Open();
+                string getCorreo = cmd2.ExecuteScalar().ToString();
+                mail = getCorreo;
                 return View();
             }
             return View("~/Views/Home/Cliente.cshtml");
@@ -116,7 +124,7 @@ namespace Eventos.Controllers
        
         public ActionResult HistorialReservasLocal()
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "SP_Historial_Reservaciones_Local"; ;
             conn.Open();
@@ -131,7 +139,7 @@ namespace Eventos.Controllers
         [HttpGet]
         public ActionResult HistorialReservasCatering()
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "SP_Historial_Reservaciones_Catering"; ;
             conn.Open();
@@ -146,7 +154,7 @@ namespace Eventos.Controllers
         [HttpGet]
         public ActionResult HistorialReservasMusica()
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "SP_Historial_Reservaciones_Musica";
             conn.Open();
@@ -161,7 +169,7 @@ namespace Eventos.Controllers
         [HttpGet]
         public ActionResult HistorialReservasDecoracion()
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "SP_Historial_Reservaciones_Decoracion";
             conn.Open();
@@ -176,7 +184,7 @@ namespace Eventos.Controllers
         [HttpGet]
         public ActionResult VerRecursos()
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "SP_VerRecursos";
             conn.Open();
@@ -194,7 +202,7 @@ namespace Eventos.Controllers
         [HttpGet]
         public ActionResult HistorialReservasCliente()
         {
-            String connection = "Data Source=DESKTOP-TK36QCF;Initial Catalog=ESeventos;Persist Security Info=True;User ID=creador;Password=309808;MultipleActiveResultSets=True;Application Name=EntityFramework";
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
             String query = "SP_Historial_Reservaciones_Cliente";
             conn.Open();

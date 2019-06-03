@@ -19,6 +19,7 @@ namespace Eventos.Models
         {
             this.ClienteXReservacions = new HashSet<ClienteXReservacion>();
             this.ReservacionXRecursoes = new HashSet<ReservacionXRecurso>();
+            
         }
     
         public int idReservacion { get; set; }
