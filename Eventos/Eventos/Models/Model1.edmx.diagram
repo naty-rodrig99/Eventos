@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0517a74f8a424929b6d5154544a2ea3a" Name="Diagram1" ZoomLevel="133">
-        <EntityTypeShape EntityType="ESeventosModel1.Administrador" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+      <Diagram DiagramId="0517a74f8a424929b6d5154544a2ea3a" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="ESeventosModel1.Administrador" Width="1.5" PointX="9" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ESeventosModel1.Cliente" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel1.ClienteXReservacion" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.ClienteXReservacion" Width="1.5" PointX="6.875" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ESeventosModel1.Paquete" Width="1.5" PointX="0.5" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ESeventosModel1.PaqueteXCliente" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ESeventosModel1.PaqueteXProducto" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ESeventosModel1.Producto" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel1.Recurso" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.Recurso" Width="1.5" PointX="5.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ESeventosModel1.RecursoXPaquete" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel1.Reservacion" Width="1.5" PointX="5.375" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel1.ReservacionXClienteXPaquete" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ESeventosModel1.ReservacionXRecurso" Width="1.5" PointX="3.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.Reservacion" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.ReservacionXClienteXPaquete" Width="1.5" PointX="5.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESeventosModel1.ReservacionXRecurso" Width="1.5" PointX="8.5" PointY="6.625" IsExpanded="true" />
         <AssociationConnector Association="ESeventosModel1.FK_ClienteXReservacion_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="ESeventosModel1.FK_PaqueteXCliente_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="ESeventosModel1.FK_ClienteXReservacion_Reservacion" ManuallyRouted="false" />
