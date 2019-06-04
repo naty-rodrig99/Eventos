@@ -52,9 +52,12 @@ namespace Eventos.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Reservacions.Add(reservacion);
+                String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
+                SqlConnection conn = new SqlConnection(connection);
+                String query = "exec SP_RealizarReservacion " + reservacion.numReservacion + ", '" + reservacion.fecha + reservacion.hora + ", '" + reservacion.descripcion + ", '" + reservacion.idPaquete + ", '" + "'";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
                 db.SaveChanges();
-                correoReservaCliente(HomeController.mail, (int)reservacion.idPaquete, reservacion.idReservacion, reservacion.descripcion);
                 return RedirectToAction("Index");
             }
 
