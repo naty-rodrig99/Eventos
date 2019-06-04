@@ -10,7 +10,7 @@ using System.Data;
 using System.Diagnostics;
 
 namespace Eventos.Controllers
-{   
+{
     public class HomeController : Controller
 
     {
@@ -21,6 +21,11 @@ namespace Eventos.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult paquete()
+        {
+
+            return View(db.Paquetes.ToList());
         }
 
         public ActionResult Administrador()
@@ -121,7 +126,7 @@ namespace Eventos.Controllers
         }
 
 
-       
+
         public ActionResult HistorialReservasLocal()
         {
             String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
@@ -235,8 +240,73 @@ namespace Eventos.Controllers
             return View(precio);
         }
 
+        [HttpGet]
+        public ActionResult VerPaquetesLocal()
+        {
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
+            SqlConnection conn = new SqlConnection(connection);
+            String query = "SP_Paquetes_Local";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+         
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
+        }
 
+        [HttpGet]
+        public ActionResult VerPaquetesDecoracion()
+        {
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
+            SqlConnection conn = new SqlConnection(connection);
+            String query = "SP_Paquetes_Decoracion";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
+        }
 
+        [HttpGet]
+        public ActionResult VerPaquetesMusica()
+        {
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
+            SqlConnection conn = new SqlConnection(connection);
+            String query = "SP_Paquetes_Musica";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
+        }
+
+        [HttpGet]
+        public ActionResult VerPaquetesCatering()
+        {
+            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
+            SqlConnection conn = new SqlConnection(connection);
+            String query = "SP_Paquetes_Catering";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
+        }
     }
+
+
+
 }
+
+    

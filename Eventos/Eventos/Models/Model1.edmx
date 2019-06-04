@@ -257,6 +257,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_CorreoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_CrearAdministrador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="usuario" Type="varchar" Mode="In" />
           <Parameter Name="correo" Type="varchar" Mode="In" />
@@ -299,6 +303,10 @@
           <Parameter Name="usuario" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_Paquetes_Catering" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Paquetes_Decoracion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Paquetes_Local" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Paquetes_Musica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_RealizarReservacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="numReservacion" Type="varchar" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
@@ -780,6 +788,14 @@
             <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_VerRecursos" ReturnType="Collection(ESeventosModel1.SP_VerRecursos_Result)" />
+          <FunctionImport Name="SP_CorreoCliente" ReturnType="Collection(String)">
+            <Parameter Name="usuario" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Paquetes_Catering" ReturnType="Collection(ESeventosModel1.SP_Paquetes_Catering_Result)" />
+          <FunctionImport Name="SP_Paquetes_Decoracion" ReturnType="Collection(ESeventosModel1.SP_Paquetes_Decoracion_Result)" />
+          <FunctionImport Name="SP_Paquetes_Local" ReturnType="Collection(ESeventosModel1.SP_Paquetes_Local_Result)" />
+          <FunctionImport Name="SP_Paquetes_Musica" ReturnType="Collection(ESeventosModel1.SP_Paquetes_Musica_Result)" />
         </EntityContainer>
         <ComplexType Name="SP_Historial_Reservaciones_Catering_Result">
           <Property Type="String" Name="numReservacion" Nullable="true" MaxLength="10" />
@@ -828,6 +844,22 @@
           <Property Type="String" Name="telefono" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="provincia" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="tipoRecurso" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="SP_Paquetes_Catering_Result">
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="precio" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Paquetes_Decoracion_Result">
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="precio" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Paquetes_Local_Result">
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="precio" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Paquetes_Musica_Result">
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="precio" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1034,6 +1066,39 @@
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="provincia" ColumnName="provincia" />
                 <ScalarProperty Name="tipoRecurso" ColumnName="tipoRecurso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CorreoCliente" FunctionName="ESeventosModel1.Store.SP_CorreoCliente" />
+          <FunctionImportMapping FunctionImportName="SP_Paquetes_Catering" FunctionName="ESeventosModel1.Store.SP_Paquetes_Catering">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ESeventosModel1.SP_Paquetes_Catering_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Paquetes_Decoracion" FunctionName="ESeventosModel1.Store.SP_Paquetes_Decoracion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ESeventosModel1.SP_Paquetes_Decoracion_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Paquetes_Local" FunctionName="ESeventosModel1.Store.SP_Paquetes_Local">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ESeventosModel1.SP_Paquetes_Local_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Paquetes_Musica" FunctionName="ESeventosModel1.Store.SP_Paquetes_Musica">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ESeventosModel1.SP_Paquetes_Musica_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

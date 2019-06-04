@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "MenuCliente";
 }
-<h2 style="text-align:center">@ViewBag.Title</h2>
+<h2 >@ViewBag.Title</h2>
 
 <div class="row">
     <div class="col-md-5">
@@ -28,7 +28,32 @@
     <div class="col-md-5">
         <div class="row">
             <br />
-            @Html.ActionLink("Realizar Reserva", "Create","Reservacions", null, new { @class = "btn btn-primary btn-large" })
+            @Html.ActionLink("Realizar Reserva", "Create", "Reservacions", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="row">
+            <br />
+            @Html.ActionLink("Visualizar Local ", "VerPaquetesLocal", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <br />
+            @Html.ActionLink("Visualizar Decoración ", "VerPaquetesDecoracion", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <br />
+            @Html.ActionLink("Visualizar Música ", "VerPaquetesMusica", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <br />
+            @Html.ActionLink("Visualizar Catering ", "VerPaquetesCatering", null, new { @class = "btn btn-primary btn-large" })
         </div>
     </div>
 

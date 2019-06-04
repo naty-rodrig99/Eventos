@@ -251,5 +251,38 @@ namespace Eventos.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VerRecursos_Result>("SP_VerRecursos");
         }
+    
+        public virtual ObjectResult<string> SP_CorreoCliente(string usuario, string password)
+        {
+            var usuarioParameter = usuario != null ?
+                new ObjectParameter("usuario", usuario) :
+                new ObjectParameter("usuario", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_CorreoCliente", usuarioParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<SP_Paquetes_Catering_Result> SP_Paquetes_Catering()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Paquetes_Catering_Result>("SP_Paquetes_Catering");
+        }
+    
+        public virtual ObjectResult<SP_Paquetes_Decoracion_Result> SP_Paquetes_Decoracion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Paquetes_Decoracion_Result>("SP_Paquetes_Decoracion");
+        }
+    
+        public virtual ObjectResult<SP_Paquetes_Local_Result> SP_Paquetes_Local()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Paquetes_Local_Result>("SP_Paquetes_Local");
+        }
+    
+        public virtual ObjectResult<SP_Paquetes_Musica_Result> SP_Paquetes_Musica()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Paquetes_Musica_Result>("SP_Paquetes_Musica");
+        }
     }
 }

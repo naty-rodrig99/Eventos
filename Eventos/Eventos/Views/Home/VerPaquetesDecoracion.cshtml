@@ -1,0 +1,42 @@
+﻿@using System.Data;
+
+@{
+    ViewBag.Title = "VerPaquetesDecoracion";
+}
+
+<h2 style="text-align:center;">Ver Paquetes del Recurso Decoración</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Decoración</title>
+</head>
+<body>
+    <h3>Local</h3>
+    <table class="table">
+        <tr>
+            <th>nombre</th>
+            <th>precio</th>
+            <th>lugar</th>
+            <th>disponible</th>
+
+            <th></th>
+        </tr>
+
+        @foreach (DataRow row in Model.Rows)
+        {
+            <tr>
+                <th>@row["nombre"]</th>
+                <th>@row["precio"]</th>
+                <th>@row["lugar"]</th>
+                <th>@row["disponible"]</th>
+
+
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
