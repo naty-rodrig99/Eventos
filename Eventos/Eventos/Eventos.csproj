@@ -328,7 +328,7 @@
     <Content Include="Views\Reservacions\Edit.cshtml" />
     <Content Include="Views\Reservacions\Index.cshtml" />
     <Content Include="Views\Paquetes\Index.cshtml" />
-    <Content Include="Views\Home\paquete.cshtml" />
+    <Content Include="Views\Paquetes\paquete.cshtml" />
     <Content Include="Views\Home\VerPaquetesLocal.cshtml" />
     <Content Include="Views\Home\VerPaquetesDecoracion.cshtml" />
     <Content Include="Views\Home\VerPaquetesMusica.cshtml" />

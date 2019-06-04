@@ -22,11 +22,7 @@ namespace Eventos.Controllers
         {
             return View();
         }
-        public ActionResult paquete()
-        {
-
-            return View(db.Paquetes.ToList());
-        }
+        
 
         public ActionResult Administrador()
         {
@@ -303,7 +299,36 @@ namespace Eventos.Controllers
             dt.Load(dr);
             return View(dt);
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Paquete paquete = db.Paquetes.Find(id);
+            if (paquete == null)
+            {
+                return HttpNotFound();
+            }
+            return View(paquete);
+        }
+
+        // POST: Paquetes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Paquete paquete = db.Paquetes.Find(id);
+            db.Paquetes.Remove(paquete);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+
     }
+
 
 
 

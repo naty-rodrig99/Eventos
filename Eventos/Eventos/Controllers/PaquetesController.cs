@@ -109,6 +109,12 @@ namespace Eventos.Controllers
             return View(paquete);
         }
 
+        public ActionResult paquete()
+        {
+
+            return View(db.Paquetes.ToList());
+        }
+
         // POST: Paquetes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

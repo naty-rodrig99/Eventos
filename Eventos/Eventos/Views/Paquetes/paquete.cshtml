@@ -12,7 +12,7 @@
     <title>paquetes</title>
 </head>
 <p>
-    @Html.ActionLink("Crear Paquete", "Create","Paquetes")
+    @Html.ActionLink("Crear Paquete", "Create")
 </p>
 <body>
     <table class="table">
@@ -50,9 +50,9 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit","Paquetes", new { id = item.idPaquete }) |
-                    @Html.ActionLink("Details", "Details","Paquetes", new { id = item.idPaquete }) |
-                    @Html.ActionLink("Delete", "Delete","Paquetes", new { id = item.idPaquete })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idPaquete }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idPaquete }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idPaquete })
                   
                 </td>
             </tr>
