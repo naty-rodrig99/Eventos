@@ -4,18 +4,14 @@
     ViewBag.Title = "VerPaquetes";
 }
 
-<<<<<<< Updated upstream
+
     <h2 style="color:MediumSeaGreen">Paquetes</h2>
 
 <p>
     @Html.ActionLink("Crear Paquete", "Create","Paquetes")
-=======
-<h2>Recursos</h2>
 
-<p>
-    @Html.ActionLink("Crear nuevo paquete", "Create","Paquetes")
->>>>>>> Stashed changes
-</p>
+
+
 <table class="table">
     <tr>
         <th>
@@ -37,7 +33,7 @@
                 @Html.DisplayFor(modelItem => item.precio)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idPaquete })
+                @Html.ActionLink("Edit", "Edit","Paquetes", new { id = item.idPaquete })
             </td>
         </tr>
     }

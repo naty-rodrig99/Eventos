@@ -36,7 +36,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.disponible)
         </td>
-        
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Paquetes", new { id = item.idPaquete }, new { @class = "btn btn-primary btn-large" }) |
+            @Html.ActionLink("Details", "Details", "Paquetes", new { id = item.idPaquete }, new { @class = "btn btn-primary btn-large" }) |
+            @Html.ActionLink("Delete", "Delete", "Paquetes", new { id = item.idPaquete }, new { @class = "btn btn-primary btn-large" })
+
+        </td>
         
     </tr>
 }

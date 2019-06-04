@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<Eventos.Models.Paquete>
 
 
-@{
-    ViewBag.Title = "Index";
-}
+
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>paquetes</title>
+    <h2 style="color:MediumSeaGreen">Paquetes</h2>
 </head>
 <p>
-    @Html.ActionLink("Crear Paquete", "Create")
+    @Html.ActionLink("Crear Paquete", "Create",null,new { @class = "btn btn-success" })
 </p>
 <body>
     <table class="table">

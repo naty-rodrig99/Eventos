@@ -54,10 +54,19 @@ namespace Eventos.Controllers
             {
                 String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
                 SqlConnection conn = new SqlConnection(connection);
-                String query = "exec SP_RealizarReservacion " + reservacion.numReservacion + ", '" + reservacion.fecha + reservacion.hora + ", '" + reservacion.descripcion + ", '" + reservacion.idPaquete + ", '" + "'";
-                SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
+                SqlCommand cmd = new SqlCommand("SP_RealizarReservacion", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@numReservacion", SqlDbType.VarChar).Value = reservacion.numReservacion;
+                cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = reservacion.fecha;
+                cmd.Parameters.Add("@hora", SqlDbType.Time).Value = reservacion.hora;
+                cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = reservacion.descripcion;
+                cmd.Parameters.Add("@idPaquete", SqlDbType.Int).Value = reservacion.idPaquete;
+                cmd.ExecuteNonQuery();
+                //String query = "exec SP_RealizarReservacion "+reservacion.numReservacion+ "," +reservacion.fecha+ ","+ reservacion.hora + "," +"'"+ reservacion.descripcion + "'," + reservacion.idPaquete ;
+                conn.Close();
                 db.SaveChanges();
+                correoReservaCliente(HomeController.mail,(int)reservacion.idPaquete, reservacion.idReservacion, reservacion.descripcion,1);
                 return RedirectToAction("Index");
             }
 
@@ -90,6 +99,7 @@ namespace Eventos.Controllers
             {
                 db.Entry(reservacion).State = EntityState.Modified;
                 db.SaveChanges();
+                correoReservaCliente(HomeController.mail, (int)reservacion.idPaquete, reservacion.idReservacion, reservacion.descripcion, 2);
                 return RedirectToAction("Index");
             }
             return View(reservacion);
@@ -118,6 +128,7 @@ namespace Eventos.Controllers
             Reservacion reservacion = db.Reservacions.Find(id);
             db.Reservacions.Remove(reservacion);
             db.SaveChanges();
+            correoElimina(HomeController.mail, reservacion.idReservacion,reservacion.descripcion);
             return RedirectToAction("Index");
         }
 
@@ -130,18 +141,8 @@ namespace Eventos.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Reservar(Reservacion reservacion)
-        {
-            String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
-            SqlConnection conn = new SqlConnection(connection);
-            String query = "exec SP_RealizarReservacion " + reservacion.numReservacion + ", '" + reservacion.fecha + reservacion.hora + ", '" + reservacion.descripcion + ", '" + reservacion.idPaquete + ", '" + "'";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
-            
-            return View("~/Views/Home/Administrador.cshtml");
-        }
 
-        public void correoReservaCliente(String mail, int idPaquete, int idReserva, String descripcion)
+        public void correoReservaCliente(String mail, int idPaquete, int idReserva, String descripcion,int tipo)
         {
 
             MailMessage correo = new MailMessage("noreplyeseventos@gmail.com", mail);
@@ -152,11 +153,41 @@ namespace Eventos.Controllers
             client.EnableSsl=true;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.Host = "smtp.gmail.com";
+            if (tipo == 1)
+            {
+                correo.Subject = "Notificacion de reserva.";
+                String body = "Estimado cliente, le informamos que se ha reservado un paquete a su nombre con los siguientes datos:\n\nNumero de reservacion:" + idReserva + "\n\nID del Paquete:" + idPaquete + "\n\nDescripcion:" + descripcion + "\n\n";
+                body += "Si usted no realizo esta reservacion , favor ponerse en contacto con soporte tecnico.\nSaludos!\n\nEl Equipo de E|S Eventos";
+                correo.Body = body;
+                client.Send(correo);
+            }
+            if(tipo == 2)
+            {
+                correo.Subject = "Notificacion de Edicion.";
+                String body = "Estimado cliente, le informamos que se ha editado una reservacion a su nombre con los siguientes datos:\n\nNumero de reservacion:" + idReserva + "\n\nID del Paquete:" + idPaquete + "\n\nDescripcion:" + descripcion + "\n\n";
+                body += "Si usted no edito esta reservacion , favor ponerse en contacto con soporte tecnico.\nSaludos!\n\nEl Equipo de E|S Eventos";
+                correo.Body = body;
+                client.Send(correo);
+            }
+        }
+        public void correoElimina(String mail, int idReserva,String detalle)
+        {
+
+            MailMessage correo = new MailMessage("noreplyeseventos@gmail.com", mail);
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("noreplyeseventos@gmail.com", "eventos123");
+            client.Port = 25;
+            client.EnableSsl = true;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Host = "smtp.gmail.com";
+          
             correo.Subject = "Notificacion de reserva.";
-            String body = "Estimado cliente, le informamos que se ha reservado un paquete a su nombre con los siguientes datos:\n\nNumero de reservacion:" + idReserva + "\n\nID del Paquete:" + idPaquete + "\n\nDescripcion:" + descripcion + "\n\n";
-            body += "Si usted no realizo esta reservacion , favor ponerse en contacto con soporte tecnico.\nSaludos!\n\nEl Equipo de E|S Eventos";
+            String body = "Estimado cliente, lamentamos que haya cancelado la reservacion con el numero :" + idReserva+" ,que se detalla como:"+detalle+ "\n\n";
+            body += "Si usted no cancelo la reservacion , favor ponerse en contacto con soporte tecnico.\nSaludos!\n\nEl Equipo de E|S Eventos";
             correo.Body = body;
             client.Send(correo);
+            
         }
     }
 }

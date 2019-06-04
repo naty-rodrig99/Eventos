@@ -41,8 +41,9 @@ namespace Eventos.Controllers
             SqlConnection conn = new SqlConnection(connection);
             String query = "exec SP_Login_Administrador " + login.usuario + ", '" + login.contrasena + "'";
             SqlCommand cmd = new SqlCommand(query, conn);
+           
             conn.Open();
-
+            
             string getValue = cmd.ExecuteScalar().ToString();
 
             if (getValue.Equals("1"))
@@ -127,7 +128,7 @@ namespace Eventos.Controllers
         {
             String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
-            String query = "SP_Historial_Reservaciones_Local"; ;
+            String query = "SP_Historial_Reservaciones_Local";
             conn.Open();
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -142,7 +143,7 @@ namespace Eventos.Controllers
         {
             String connection = "Server=.;Database=ESeventos;Trusted_Connection=True";
             SqlConnection conn = new SqlConnection(connection);
-            String query = "SP_Historial_Reservaciones_Catering"; ;
+            String query = "SP_Historial_Reservaciones_Catering";
             conn.Open();
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
